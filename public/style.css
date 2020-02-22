@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    font-size: 1.3em;
 }
 
 body {
@@ -7,8 +8,16 @@ body {
     margin: 0;
     background-color: darkslategrey;
     color: lightgrey;
-
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    margin: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;

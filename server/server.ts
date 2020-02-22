@@ -10,10 +10,8 @@ const port = 4000
 let count = 0
 
 // Defined Routes
-app.use('/', (...[req, , next]) => {
-    if (req.path === '/') {
-        console.log('Someone asked to view the home page ^^, visitor: ', ++count)
-    }
+app.get('/', (...[, , next]) => {
+    console.log('Someone asked to view the home page ^^, visitor: ', ++count)
     next()
 })
 app.use(express.static('public'))
