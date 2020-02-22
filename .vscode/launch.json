@@ -1,0 +1,15 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+        {
+            "name":"TS Server",
+            "type":"node",
+            "request":"launch",
+            "protocol":"inspector",
+            "args":["${workspaceRoot}/server/server.ts"],
+            "cwd":"${workspaceRoot}",
+            "runtimeExecutable":"${workspaceRoot}/node_modules/.bin/ts-node-dev",
+            "restart":true
+        }
+	]
+}
