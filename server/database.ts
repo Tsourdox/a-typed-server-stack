@@ -1,42 +1,52 @@
-import { MongoClient, Db } from 'mongodb'
+import { MongoClient, Db, Collection } from 'mongodb'
 
-const databaseName = "mongo"
-const url = 'mongodb://localhost:27017/mongo'
-const options = { useUnifiedTopology: true }
+class DatabaseController {
+    private databaseName = "mongo"
+    private url = 'mongodb://localhost:27017/mongo'
+    private options = { useUnifiedTopology: true }
+    private database!: Db
+    private collections: string[]
 
-const collections = ['users', 'meta']
-let db: Db
+    constructor(collections: string[]) {
+        this.collections = collections
+    }
 
-/**
- * Will test connection with the database server and create
- * the database and all collections if they do not exist.
- */
-export async function connectWithDatabase() {
-    console.log('\nConnecting to database...')
-    try {
-        // Connect to or create the database if not present
-        const client = await new MongoClient(url, options)
-        const connection = await client.connect()
-        db = await connection.db(databaseName)
-        console.log(`Connection established with database: "${databaseName}"`)
+    /** returns a mongodb collection object */
+    public collection(name: string): Collection {
+        return this.database.collection(name)
+    }
 
-        // Create collections if not present
-        createCollections()
+    /**
+     * This function should be called once when the server starts.
+     * It connects to the database and creates missing collections.
+     */
+    public async connect(): Promise<void> {
+        console.log('\nConnecting to database...')
+        try {
+            // Connect to or create the database if not present
+            const client = new MongoClient(this.url, this.options)
+            const connection = await client.connect()
+            this.database = connection.db(this.databaseName)
+            console.log(`Connection established with database: "${this.databaseName}"`)
+    
+            // Create collections if not present
+            await this.createCollections()
+        } catch(err) {
+            throw err
+        }
+    }
 
-    } catch(err) {
-        throw err
+    /** Create all missing collections */
+    private async createCollections() {
+        console.log('\nChecking collections...')
+        if (this.database) {
+            for (const name of this.collections) {
+                await this.database.createCollection(name)
+                console.log(`"${name}"`, '✅')
+            }
+        }
     }
 }
 
-/** Create all missing collections */
-async function createCollections() {
-    console.log('\nChecking collections...')
-    for (const name of collections) {
-        await db.createCollection(name)
-        console.log(`"${name}"\t ✅`)
-    }
-}
-
-// export async function insert() {
-//     await db.collection(name).insertOne({ username: 'tsourdox', password: 'beta' })
-// }
+/** Like a singleton because same class instance is exported */
+export default new DatabaseController(['users', 'meta'])
