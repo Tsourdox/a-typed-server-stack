@@ -11,7 +11,7 @@ const port = 4000
 
 //======  Defined Routes  ======//
 // Counting middleware
-app.get('/', async (...[, , next]) => {
+app.get('/', async (_req, _res, next) => {
     let count = await getVisitors()
     console.log('Someone asked to view the home page ^^, visitor: ', ++count)
     incrementVisitors()
@@ -22,7 +22,7 @@ app.get('/', async (...[, , next]) => {
 app.use(express.static('public'))
 
 // 404 page
-app.use((...[, res]) => res.status(404).send(
+app.use((_req, res) => res.status(404).send(
     "I'm just here to tell you that the page do not exist, have a great day! 🦄"
 ))
 
