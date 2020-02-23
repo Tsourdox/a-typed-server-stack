@@ -8,10 +8,10 @@ Compatible with debugger in VS-Code!
 Just clone repo and run `npm i` once to install dependecies.
 
 ### Development
-Run `npm start` or `npm run dev` (they are the same command) or start via debugger in VS Code, keep in mind that running the debugger will be slower than the script alone.
+Run `npm start` or `npm run dev` (they are the same command) or start via debugger in VS Code, keep in mind that running the debugger will be slower than running the start script alone.
 
 ### Production
-Simply run `npm run prod` which is going to run the server code with ts-node in production mode.
+Simply run `npm run prod` which is going to run the server code with ts-node in production mode, the only theoretical drawback is a bit more memory usage because of larger files. CPU usage shouldn't be affected.
 
 ### Testing
 Not implement - a feature for the future maybe ^^
