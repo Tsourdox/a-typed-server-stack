@@ -1,6 +1,7 @@
 import express from 'express'
-import database from './database'
-import { incrementVisitors, getVisitors } from './handlers/metaHandler'
+// import { incrementVisitors, getVisitors } from './handlers/metaHandler'
+import db from './repositories/database'
+import { testRepo } from './handlers/user.handler'
 
 // Express server settings
 const app = express()
@@ -12,9 +13,13 @@ const port = 4000
 //======  Defined Routes  ======//
 // Counting middleware
 app.get('/', async (_req, _res, next) => {
-    let count = await getVisitors()
-    console.log('Someone asked to view the home page ^^, visitor: ', ++count)
-    incrementVisitors()
+    // let count = await getVisitors()
+    // console.log('Someone asked to view the home page ^^, visitor: ', ++count)
+    // incrementVisitors()
+
+    // Try mongodb-typescript code
+    testRepo()
+
     next()
 })
 
@@ -30,9 +35,9 @@ app.use((_req, res) => res.status(404).send(
 //======  Spin up the server!  ======//
 async function run() {
     try {
-        await database.connect()
+        await db.connect()
         app.listen(port, host, () => {
-            console.log(`\nSever is listening on http://${host}:${port}`)
+            console.log(`\nSever is listening on http://${host}:${port}\n`)
         })
     } catch(err) {
         console.error(err)
