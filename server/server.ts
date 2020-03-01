@@ -1,4 +1,5 @@
 import express from 'express'
+import helmet from 'helmet'
 import { ObjectId } from 'mongodb'
 require('express-async-errors') // so we can have async middlewares ^^
 
@@ -12,6 +13,9 @@ import api from './api/api'
 const app = express()
 const host = 'localhost'
 const port = 4000
+
+// Use helmet for some default security
+app.use(helmet())
 
 //======  Defined Routes  ======//
 
