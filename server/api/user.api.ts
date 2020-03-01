@@ -11,28 +11,24 @@ const handler = new UserHandler()
 
 /* CREATE */
 const insert: RequestHandler<User, null> = async (req, res) => {
-    console.log('create - body', req.body)
     await handler.insert(req.body)
     res.status(204).json(null)
 }
 
 /* READ */
 const findById: RequestHandler<Document, User> = async (req, res) => {
-    console.log('read - body', req.body)
     const user = await handler.findById(req.body.id)
     res.status(200).json(user)
 }
 
 /* UPDATE */
 const update: RequestHandler<Updating<User>, null> = async (req, res) => {
-    console.log('update - body', req.body)
     await handler.update(req.body)
     res.status(204).json(null)
 } 
 
 /* DELETE */
 const remove: RequestHandler<Document, null> = async (req, res) => {
-    console.log('delete - body', req.body)
     await handler.remove(req.body.id)
     res.status(204).json(null)
 }

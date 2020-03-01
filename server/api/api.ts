@@ -17,7 +17,7 @@ const apiErrorHandler: ErrorHandler = (err, _req, res, next) => {
         console.error(err) // Do we need to log 
         res.status(err.status).send(err.message)
     }
-    console.error('An error in the API was not caught properly')
+    console.error('APIError: An error in the API was not caught properly')
     next(err)
 }
 api.use(apiErrorHandler)

@@ -12,7 +12,7 @@ export class ServerError extends Error {
 
 export const errorMiddleware: ErrorHandler = (err, _req, res, _next) => {
     const status = err.status || 500
-    console.error(err)
+    console.error("ServerError:", err)
     res.status(status)
     res.send("Shit, something went horribly wrong.. so sorry! 👻")
 }
