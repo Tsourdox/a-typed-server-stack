@@ -6,8 +6,11 @@ Compatible with debugger in VS-Code!
 
 ### Installation
 Just clone repo and run `npm i` once to install dependecies.
+Install the database Mongodb, om macOS run: `brew install mongodb-comunity`
+
 
 ### Development
+Make sure you have a database up and running, om macOS run: `brew services start mongodb-comunity`
 Run `npm start` or `npm run dev` (they are the same command) or start via debugger in VS Code, keep in mind that running the debugger will be slower than running the start script alone.
 
 ### Production
