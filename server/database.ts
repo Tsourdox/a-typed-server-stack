@@ -22,16 +22,12 @@ class DatabaseController {
      */
     public async connect(): Promise<void> {
         console.log('\nConnecting to database...')
-        try {
-            // Will create the database if not present
-            await this.client.connect()
-            console.log(`Connection established with database: "${this.dbName}"`)
-            
-            // Also make sure to initialize all the c
-            this.createRepositories()
-        } catch(err) {
-            throw err
-        }
+        // Will create the database if not present
+        await this.client.connect()
+        console.log(`Connection established with database: "${this.dbName}"`)
+        
+        // Also make sure to initialize all the c
+        this.createRepositories()
     }
 
     /** Will create all needed collections in the database */
