@@ -1,21 +1,22 @@
 import { id } from 'mongodb-typescript';
 import { ObjectId } from 'mongodb';
+import { Optional } from '../types';
 
-interface User {
+export interface User {
+    id: ObjectId
     username: string
     password: string
 }
 
-/** A document that is linked to the mongodb database model */
+/** A document of a user that is linked to the mongodb database model */
 export class UserDocument implements User {
     @id id: ObjectId
     username: string
     password: string
     
-    constructor(user: User) {
-        this.id = new ObjectId()
-        
+    constructor(user: Optional<User, 'id'>) {
         // ---> ? <--- is a neat little trick so we can support ts-emitDecoratorMetadata ✅
+        this.id = new ObjectId(user?.id)
         this.username = user?.username
         this.password = user?.password
     }

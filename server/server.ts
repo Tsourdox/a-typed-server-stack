@@ -1,10 +1,12 @@
 import express from 'express'
+import { ObjectId } from 'mongodb'
 require('express-async-errors') // so we can have async middlewares ^^
 
 // import { incrementVisitors, getVisitors } from './handlers/metaHandler'
 import db from './database'
 import UserHandler from './handlers/user.handler'
 import { errorMiddleware, notFoundMiddleware } from './errors'
+import api from './api/api'
 
 // Express server settings
 const app = express()
@@ -15,25 +17,20 @@ const port = 4000
 
 /* Reactions on every get request */
 app.get('/', async (_req, _res, next) => {
-    if (Math.round(Math.random())) {
-        throw new Error()
-    }
     // let count = await getVisitors()
     // console.log('Someone asked to view the home page ^^, visitor: ', ++count)
     // incrementVisitors()
 
-    // Try mongodb-typescript code
-    await new UserHandler().testRepo()
+    await new UserHandler().update({ id: new ObjectId('5e5305dfd2a60e7d84b1032f'), username: 'david', password: 'haxxed' })
 
     next()
 })
 
 /* Hook up API endpoints */
-// TODO: app.use(api)
+app.use('/api', api)
 
 /* Serve public folder */
 app.use(express.static('public'))
-
 
 /* Hook up 404 page */
 app.use(notFoundMiddleware)
