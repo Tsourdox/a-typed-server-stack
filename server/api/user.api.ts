@@ -7,7 +7,7 @@ import { FilterQuery } from 'mongodb'
 const user = Router()
 const handler = new UserHandler()
 
-//===== USER MIDLEWARE FUNCTIONS  =====//
+//=====  USER MIDDLEWARE FUNCTIONS  =====//
 
 /* CREATE */
 const insert: RequestHandler<User, null> = async (req, res) => {
