@@ -1,12 +1,14 @@
 # a-typed-server-stack
 
-This is a boilerplate of a node-express server that runs entirely on typescript without ever neeeding to compiling to JS.
+This is a boilerplate of a node-express server that runs entirely on typescript without ever neeeding to compiling to JS. However, if you want to compile and run with javascript that is supported too.
 
 Compatible with debugger in VS-Code!
 
 ### Installation
 Just clone repo and run `npm i` once to install dependecies.
-Install the database Mongodb, om macOS run: `brew install mongodb-comunity`
+Install the database Mongodb.
+On macOS run: `brew install mongodb-comunity`
+On Windows run: `????`
 
 
 ### Development
