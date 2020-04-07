@@ -1,12 +1,11 @@
-import { Router } from 'express'
-import bodyParser from 'body-parser'
+import { Router, json } from 'express'
 import user from './user.api'
 import { ErrorHandler } from '../types'
 
 const api = Router()
 
 // parse incoming data as json code
-api.use(bodyParser.json())
+api.use(json())
 
 // all api routes
 api.use('/users', user)

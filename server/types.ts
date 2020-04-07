@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, Params } from 'express-serve-static-core'
-import { ObjectId } from 'mongodb';
-import { ServerError } from './errors';
+import { ObjectId } from 'mongodb'
+import { ServerError } from './errors'
 
 export interface Document {
     id: ObjectId | string
@@ -12,7 +12,7 @@ export type ErrorHandler = (
     req: Request<any, string, any>,
     res: Response<string>,
     next: NextFunction
-) => void;
+) => void
 
 
 /** An easy to use request handler */
@@ -20,7 +20,7 @@ export type RequestHandler<ReqBody, ResBody, P extends Params = {}> = (
     req: Request<P, ResBody, ReqBody>,
     res: Response<ResBody>,
     next: NextFunction
-) => void;
+) => void
 
 /** An easy to use partial type where all properies but id a made optional - used when updating data */
 export type Updating<T extends { id: ObjectId }> = Partial<T> & { id: ObjectId }
